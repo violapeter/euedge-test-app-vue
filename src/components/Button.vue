@@ -5,12 +5,14 @@
 </template>
 
 <script>
+const BUTTON_TYPES = ['primary', 'secondary', 'tertiary']
+
 export default {
   name: 'Button',
   props: {
     appearance: {
       default: 'primary',
-      type: String
+      validator: val => [...BUTTON_TYPES].includes(val)
     }
   },
   computed: {
