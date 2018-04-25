@@ -1,27 +1,29 @@
 <template>
   <tr class="person">
     <td>
-      <div class="name">{props.name}</div>
-      <div class="job">{props.job
-        ? props.job
-        : (<div class="not-provided">/not provided/</div>)}</div>
+      <div class="name">{{ name }}</div>
+      <div v-if="job" class="job">{{ job }}</div>
+      <div v-else class="not-provided">/not provided/</div>
     </td>
-    <td class="age">{props.age}</td>
-    <td>{props.nick}</td>
+    <td class="age">{{ age }}</td>
+    <td>{{ nick }}</td>
     <td class="employee">
-      <Checkbox checked={props.employee} id={`employee-${props.id}`} readOnly />
+      <Checkbox employee readOnly v-bind:id="id" />
     </td>
     <td class="actions">
       <button class="delete">
-        <Icon icon="delete"></Icon>
+        <!--<Icon icon="delete"></Icon>-->
       </button>
     </td>
   </tr>
 </template>
 
 <script>
+import Checkbox from './Checkbox'
 export default {
-  name: 'PersonRow'
+  name: 'PersonRow',
+  components: {Checkbox},
+  props: ['name', 'job', 'age', 'nick', 'employee']
 }
 </script>
 
