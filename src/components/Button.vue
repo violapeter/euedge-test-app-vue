@@ -14,11 +14,6 @@ export default {
       default: 'primary',
       validator: val => [...BUTTON_TYPES].includes(val)
     }
-  },
-  computed: {
-    classes: {
-      isPrimary: 'primary'
-    }
   }
 }
 </script>

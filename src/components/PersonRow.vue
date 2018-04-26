@@ -12,7 +12,7 @@
     </td>
     <td class="actions">
       <button class="delete">
-        <!--<Icon icon="delete"></Icon>-->
+        <Icon icon="delete"></Icon>
       </button>
     </td>
   </tr>
@@ -20,9 +20,10 @@
 
 <script>
 import Checkbox from './Checkbox'
+import Icon from './Icon'
 export default {
   name: 'PersonRow',
-  components: {Checkbox},
+  components: {Icon, Checkbox},
   props: ['name', 'job', 'age', 'nick', 'employee']
 }
 </script>
