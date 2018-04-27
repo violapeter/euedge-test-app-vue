@@ -1,18 +1,41 @@
 <template>
     <thead class="table-head">
         <tr>
-            <th class="">Name (Job title)</th>
-            <th class="right">Age</th>
-            <th class="">Nickname</th>
-            <th class="">Employee</th>
-            <th></th>
+            <th v-for="column in columns"
+              :class="getSortClasses(column.id)"
+              :key="column.id">{{ column.title }}</th>
         </tr>
     </thead>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import * as enums from '../enums'
+
 export default {
-  name: 'PersonTableHead'
+  name: 'PersonTableHead',
+  computed: mapGetters({
+    sortType: 'sortType',
+    sortOrder: 'sortOrder',
+    getSortingClasses: 'sortingClasses'
+  }),
+  data: () => ({
+    columns: [
+      { id: 'name', title: 'Name' },
+      { id: 'age', title: 'Age' },
+      { id: 'nickname', title: 'Nickname' },
+      { id: 'employee', title: 'Employee' },
+      { id: 'delete', title: '' }
+    ]
+  }),
+  methods: {
+    getSortClasses (id) {
+      return [
+        id === this.sortType ? 'is-sorted' : '',
+        this.sortOrder === enums.ASC ? 'is-ascending' : 'is-descending'
+      ].join` `
+    }
+  }
 }
 </script>
 

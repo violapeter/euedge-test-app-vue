@@ -1,6 +1,6 @@
 <template>
   <div class="checkbox-wrapper">
-    <input class="checkbox-input" type="checkbox" :id="id" />
+    <input class="checkbox-input" type="checkbox" :id="id" :disabled="readOnly" :checked="checked" />
     <label class="checkbox-box" :for="id"></label>
     <label class="checkbox-label" :for="id">
       <slot></slot>
@@ -15,6 +15,12 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    checked: {
+      type: Boolean
+    },
+    readOnly: {
+      type: Boolean
     }
   }
 }

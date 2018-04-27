@@ -18,7 +18,7 @@ export default {
       type: Number
     },
     icon: {
-      type: String
+      validator: icon => [...Object.keys(icons)].includes(icon)
     }
   },
   filters: {

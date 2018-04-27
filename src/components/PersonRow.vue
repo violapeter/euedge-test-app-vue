@@ -8,7 +8,7 @@
     <td class="age">{{ age }}</td>
     <td>{{ nick }}</td>
     <td class="employee">
-      <Checkbox employee readOnly v-bind:id="id" />
+      <Checkbox v-bind:checked="employee" readOnly v-bind:id="`person-${id}`" />
     </td>
     <td class="actions">
       <button class="delete">
@@ -24,7 +24,7 @@ import Icon from './Icon'
 export default {
   name: 'PersonRow',
   components: {Icon, Checkbox},
-  props: ['name', 'job', 'age', 'nick', 'employee']
+  props: ['id', 'name', 'job', 'age', 'nick', 'employee']
 }
 </script>
 
