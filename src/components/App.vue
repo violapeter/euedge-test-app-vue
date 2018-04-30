@@ -2,6 +2,12 @@
   <div id="app">
     <Header></Header>
     <PersonTable v-bind:persons="persons" v-bind:sort-order="enums.ASC" sort-type="name"></PersonTable>
+    <Dialog
+      title="Add person"
+      primary-label="Add"
+      secondary-label="Cancel"
+      :opened="isAddDialogOpen"
+      @close="closeAddDialog">Lorem ipsum dolor sit amet ad adscipillit elit</Dialog>
   </div>
 </template>
 
@@ -12,15 +18,24 @@ import Header from './Header'
 import PersonRow from './PersonRow'
 import PersonTableHead from './PersonTableHead'
 import PersonTable from './PersonTable'
+import Dialog from './Dialog'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   data: () => ({ persons, enums }),
   components: {
+    Dialog,
     PersonTable,
     PersonTableHead,
     PersonRow,
     Header
+  },
+  methods: {
+    ...mapMutations(['closeAddDialog'])
+  },
+  computed: {
+    ...mapGetters(['isAddDialogOpen'])
   }
 }
 </script>
