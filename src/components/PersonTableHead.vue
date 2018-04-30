@@ -2,6 +2,7 @@
     <thead class="table-head">
         <tr>
             <th v-for="column in columns"
+              @click="sortBy({ type: column.id, isAscending })"
               :class="getSortClasses(column.id)"
               :key="column.id">{{ column.title }}</th>
         </tr>
@@ -9,21 +10,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import * as enums from '../enums'
-
+import { mapMutations } from 'vuex'
 export default {
   name: 'PersonTableHead',
-  computed: mapGetters({
-    sortType: 'sortType',
-    sortOrder: 'sortOrder',
-    getSortingClasses: 'sortingClasses'
-  }),
+  props: ['sortType', 'isAscending'],
   data: () => ({
     columns: [
-      { id: 'name', title: 'Name' },
+      { id: 'name', title: 'Name (Job title)' },
       { id: 'age', title: 'Age' },
-      { id: 'nickname', title: 'Nickname' },
+      { id: 'nick', title: 'Nickname' },
       { id: 'employee', title: 'Employee' },
       { id: 'delete', title: '' }
     ]
@@ -32,9 +27,11 @@ export default {
     getSortClasses (id) {
       return [
         id === this.sortType ? 'is-sorted' : '',
-        this.sortOrder === enums.ASC ? 'is-ascending' : 'is-descending'
+        this.isAscending ? 'is-ascending' : 'is-descending',
+        id === 'age' ? 'right' : ''
       ].join` `
-    }
+    },
+    ...mapMutations([ 'sortBy' ])
   }
 }
 </script>

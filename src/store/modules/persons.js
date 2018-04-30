@@ -1,51 +1,53 @@
 import personsApi from '../../api/persons'
 import * as enums from '../../enums'
 
+const sortPersons = (persons, sortBy, isAscending) =>
+  persons
+    .map((x, index) => ({
+      sortBy: (sortBy === 'name' || sortBy === 'nick') && x[sortBy]
+        ? x[sortBy]['toLowerCase']()
+        : sortBy === 'age'
+          ? parseInt(x[sortBy]) || 0
+          : sortBy === 'employee'
+            ? x[sortBy] ? 1 : 0
+            : x,
+      index
+    }))
+    .sort((x, y) => x.sortBy < y.sortBy ? -1 : x.sortBy > y.sortBy ? 1 : 0 || x.index - y.index)
+    .map(x => persons[x.index])[isAscending ? 'map' : 'reverse'](x => x)
+
 export default {
   state: {
     persons: [],
     sortType: enums.NAME,
-    sortOrder: enums.ASC
+    isAscending: true
   },
   mutations: {
     addPerson (state, { person }) {
       state.persons.push(person)
     },
-
     removePerson (state, { id }) {
       state.persons = state.persons.filter(person => person.id !== id)
     },
-
     setPersons (state, persons) {
       state.persons = persons
+    },
+    sortBy (state, payload) {
+      state.sortType = payload.type
+      state.isAscending = !payload.isAscending
+      state.persons = sortPersons(state.persons, payload.type, !payload.isAscending)
     }
   },
   actions: {
-    getAllPersons ({ commit }) {
+    getAllPersons ({ state, commit }) {
       personsApi.getPersons(persons => {
-        commit('setPersons', persons)
+        commit('setPersons', sortPersons(persons, state.sortType, state.isAscending))
       })
     }
   },
   getters: {
     allPersons: state => state.persons,
-    sortOrder: state => state.sortOrder,
-    sortType: state => state.sortType,
-    sortedPersons: state => (sortType, sortOrder) =>
-      state.persons.sort((personA, personB) => {
-        const a = personA[sortType]
-        const b = personB[sortType]
-
-        switch (typeof a) {
-          case 'string':
-            const x = a.toLowerCase()
-            const y = b.toLowerCase()
-            return x < y ? -1 : x > y ? 1 : 0
-          case 'number':
-            return a - b
-          case 'boolean':
-            return (a === b) ? 0 : b ? -1 : 1
-        }
-      })[sortOrder === enums.DESC ? 'reverse' : 'map'](x => x)
+    isAscending: state => state.isAscending,
+    sortType: state => state.sortType
   }
 }

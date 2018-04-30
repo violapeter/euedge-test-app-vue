@@ -1,9 +1,11 @@
 <template>
     <table class="table">
-        <PersonTableHead></PersonTableHead>
+        <PersonTableHead
+          :sortType="sortType"
+          :isAscending="isAscending"></PersonTableHead>
         <tbody>
             <PersonRow
-                v-for="(person, index) in sortedPersons(sortType, sortOrder)"
+                v-for="(person, index) in allPersons"
                 :key="index"
                 :id="index"
                 :name="person.name"
@@ -22,11 +24,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'PersonTable',
   components: {PersonRow, PersonTableHead},
-  computed: mapGetters({
-    sortedPersons: 'sortedPersons',
-    sortType: 'sortType',
-    sortOrder: 'sortOrder'
-  }),
+  computed: {...mapGetters([
+    'allPersons',
+    'sortType',
+    'isAscending'
+  ])},
   created () {
     this.$store.dispatch('getAllPersons')
   }
