@@ -7,7 +7,9 @@
       primary-label="Add"
       secondary-label="Cancel"
       :opened="isAddDialogOpen"
-      @close="closeAddDialog">Lorem ipsum dolor sit amet ad adscipillit elit</Dialog>
+      @close="closeAddDialog">
+      <EditorForm></EditorForm>
+    </Dialog>
     <Dialog
       title="Are you sure you want to delete it?"
       primary-label="Yes"
@@ -15,6 +17,7 @@
       :opened="isDeleteDialogOpen"
       @onPrimary="removePerson"
       @close="closeDeleteDialog"></Dialog>
+    <DataDump :data="lastAdded"></DataDump>
   </div>
 </template>
 
@@ -25,7 +28,9 @@ import Header from './Header'
 import PersonRow from './PersonRow'
 import PersonTableHead from './PersonTableHead'
 import PersonTable from './PersonTable'
+import DataDump from './DataDump'
 import Dialog from './Dialog'
+import EditorForm from './EditorForm'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
@@ -36,13 +41,15 @@ export default {
     PersonTable,
     PersonTableHead,
     PersonRow,
-    Header
+    Header,
+    EditorForm,
+    DataDump
   },
   methods: {
     ...mapMutations(['closeAddDialog', 'closeDeleteDialog', 'removePerson'])
   },
   computed: {
-    ...mapGetters(['isAddDialogOpen', 'isDeleteDialogOpen'])
+    ...mapGetters(['lastAdded', 'isAddDialogOpen', 'isDeleteDialogOpen'])
   }
 }
 </script>

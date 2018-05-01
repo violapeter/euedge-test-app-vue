@@ -21,7 +21,8 @@ export default {
     persons: [],
     sortType: enums.NAME,
     isAscending: true,
-    selectedToDelete: false
+    selectedToDelete: false,
+    lastAdded: {}
   },
   mutations: {
     addPerson (state, { person }) {
@@ -55,6 +56,7 @@ export default {
   getters: {
     allPersons: state => state.persons,
     isAscending: state => state.isAscending,
-    sortType: state => state.sortType
+    sortType: state => state.sortType,
+    lastAdded: state => state.lastAdded
   }
 }
