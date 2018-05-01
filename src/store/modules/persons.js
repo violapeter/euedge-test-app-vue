@@ -22,11 +22,17 @@ export default {
     sortType: enums.NAME,
     isAscending: true,
     selectedToDelete: false,
-    lastAdded: {}
+    person: {}
   },
   mutations: {
-    addPerson (state, { person }) {
-      state.persons.push(person)
+    addPerson (state) {
+      state.persons.push(state.person)
+    },
+    modifyPerson (state, { field, value }) {
+      state.person = {
+        ...state.person,
+        [field]: value
+      }
     },
     removePerson (state) {
       if (state.selectedToDelete !== false) {
@@ -57,6 +63,6 @@ export default {
     allPersons: state => state.persons,
     isAscending: state => state.isAscending,
     sortType: state => state.sortType,
-    lastAdded: state => state.lastAdded
+    person: state => state.person
   }
 }

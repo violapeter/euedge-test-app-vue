@@ -7,6 +7,7 @@
       primary-label="Add"
       secondary-label="Cancel"
       :opened="isAddDialogOpen"
+      @onPrimary="addPerson"
       @close="closeAddDialog">
       <EditorForm></EditorForm>
     </Dialog>
@@ -17,7 +18,7 @@
       :opened="isDeleteDialogOpen"
       @onPrimary="removePerson"
       @close="closeDeleteDialog"></Dialog>
-    <DataDump :data="lastAdded"></DataDump>
+    <DataDump :data="person"></DataDump>
   </div>
 </template>
 
@@ -46,10 +47,10 @@ export default {
     DataDump
   },
   methods: {
-    ...mapMutations(['closeAddDialog', 'closeDeleteDialog', 'removePerson'])
+    ...mapMutations(['closeAddDialog', 'closeDeleteDialog', 'removePerson', 'addPerson'])
   },
   computed: {
-    ...mapGetters(['lastAdded', 'isAddDialogOpen', 'isDeleteDialogOpen'])
+    ...mapGetters(['person', 'isAddDialogOpen', 'isDeleteDialogOpen'])
   }
 }
 </script>

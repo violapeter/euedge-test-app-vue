@@ -1,16 +1,29 @@
 <template>
   <fieldset class="fieldset">
     <label :for="id">{{ label }}</label>
-    <input @change="change" :id="id" :type="type" class="input" />
+    <input
+      @change="$emit('change', $event.target)"
+      @input="$emit('input', $event.target)"
+      @keyup="$emit('keyup', $event.target)"
+      :id="id"
+      :type="type"
+      class="input"/>
   </fieldset>
 </template>
 
 <script>
+const TEXT_FIELD_TYPES = ['text', 'number', 'email', 'password', 'search', 'tel', 'url']
 export default {
   name: 'TextField',
-  props: ['id', 'label', 'type'],
-  methods: {
-    change (e) { console.log(e) }
+  props: {
+    id: {
+      required: true,
+      type: String
+    },
+    type: {
+      validator: val => [...TEXT_FIELD_TYPES].includes(val)
+    },
+    label: String
   }
 }
 </script>

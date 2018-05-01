@@ -1,6 +1,7 @@
 <template>
   <div class="checkbox-wrapper">
-    <input class="checkbox-input" type="checkbox" :id="id" :disabled="readOnly" :checked="checked" />
+    <input class="checkbox-input" type="checkbox" :id="id" :disabled="readOnly" :checked="checked"
+      @change="$emit('change', $event.target)"/>
     <label class="checkbox-box" :for="id"></label>
     <label class="checkbox-label" :for="id">
       <slot></slot>
