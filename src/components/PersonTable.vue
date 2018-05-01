@@ -24,11 +24,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'PersonTable',
   components: {PersonRow, PersonTableHead},
-  computed: {...mapGetters([
-    'allPersons',
-    'sortType',
-    'isAscending'
-  ])},
+  computed: {
+    ...mapGetters(['allPersons', 'sortType', 'isAscending'])
+  },
   created () {
     this.$store.dispatch('getAllPersons')
   }

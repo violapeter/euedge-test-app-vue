@@ -11,7 +11,7 @@
       <Checkbox v-bind:checked="employee" readOnly v-bind:id="`person-${id}`" />
     </td>
     <td class="actions">
-      <button class="delete">
+      <button class="delete" @click="setDelete">
         <Icon icon="delete"></Icon>
       </button>
     </td>
@@ -21,10 +21,18 @@
 <script>
 import Checkbox from './Checkbox'
 import Icon from './Icon'
+import { mapMutations } from 'vuex'
 export default {
   name: 'PersonRow',
   components: {Icon, Checkbox},
-  props: ['id', 'name', 'job', 'age', 'nick', 'employee']
+  props: ['id', 'name', 'job', 'age', 'nick', 'employee'],
+  methods: {
+    ...mapMutations(['openDeleteDialog', 'selectToDelete']),
+    setDelete () {
+      this.openDeleteDialog()
+      this.selectToDelete({id: this.id})
+    }
+  }
 }
 </script>
 

@@ -25,8 +25,14 @@ export default {
   name: 'Dialog',
   components: {Button, Icon},
   methods: {
-    handlePrimary: () => { this.$emit('close') },
-    handleSecondary: () => { this.$emit('close') }
+    handlePrimary () {
+      this.$emit('close')
+      this.$emit('onPrimary')
+    },
+    handleSecondary () {
+      this.$emit('close')
+      this.$emit('onSecondary')
+    }
   },
   props: {
     title: { type: String },

@@ -1,6 +1,6 @@
 export default {
   state: {
-    isAddDialogOpen: true,
+    isAddDialogOpen: false,
     isDeleteDialogOpen: false
   },
   mutations: {
@@ -8,7 +8,6 @@ export default {
       state.isAddDialogOpen = true
     },
     closeAddDialog: state => {
-      console.log(state)
       state.isAddDialogOpen = false
     },
     openDeleteDialog: state => {

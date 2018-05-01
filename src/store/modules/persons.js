@@ -20,14 +20,21 @@ export default {
   state: {
     persons: [],
     sortType: enums.NAME,
-    isAscending: true
+    isAscending: true,
+    selectedToDelete: false
   },
   mutations: {
     addPerson (state, { person }) {
       state.persons.push(person)
     },
-    removePerson (state, { id }) {
-      state.persons = state.persons.filter(person => person.id !== id)
+    removePerson (state) {
+      if (state.selectedToDelete !== false) {
+        state.persons = state.persons.filter((person, index) => index !== state.selectedToDelete)
+        state.selectedToDelete = false
+      }
+    },
+    selectToDelete (state, { id }) {
+      state.selectedToDelete = id
     },
     setPersons (state, persons) {
       state.persons = persons

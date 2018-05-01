@@ -8,6 +8,13 @@
       secondary-label="Cancel"
       :opened="isAddDialogOpen"
       @close="closeAddDialog">Lorem ipsum dolor sit amet ad adscipillit elit</Dialog>
+    <Dialog
+      title="Are you sure you want to delete it?"
+      primary-label="Yes"
+      secondary-label="Cancel"
+      :opened="isDeleteDialogOpen"
+      @onPrimary="removePerson"
+      @close="closeDeleteDialog"></Dialog>
   </div>
 </template>
 
@@ -32,10 +39,10 @@ export default {
     Header
   },
   methods: {
-    ...mapMutations(['closeAddDialog'])
+    ...mapMutations(['closeAddDialog', 'closeDeleteDialog', 'removePerson'])
   },
   computed: {
-    ...mapGetters(['isAddDialogOpen'])
+    ...mapGetters(['isAddDialogOpen', 'isDeleteDialogOpen'])
   }
 }
 </script>

@@ -56,4 +56,11 @@ export default {
     box-shadow: none;
     color: #fff;
   }
+
+  button .icon {
+    fill: #fff;
+    width: 16px;
+    height: 16px;
+    margin: 0 10px 0 0;
+  }
 </style>
