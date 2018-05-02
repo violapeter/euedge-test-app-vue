@@ -2,7 +2,7 @@
     <thead class="table-head">
         <tr>
             <th v-for="column in columns"
-              @click="sortBy({ type: column.id, isAscending })"
+              @click="column.title ? sortBy({ type: column.id, isAscending }) : ''"
               :class="getSortClasses(column.id)"
               :key="column.id">{{ column.title }}</th>
         </tr>
