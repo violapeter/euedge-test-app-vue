@@ -8,7 +8,7 @@
     <td class="age">{{ age }}</td>
     <td>{{ nick }}</td>
     <td class="employee">
-      <Checkbox v-bind:checked="employee" readOnly v-bind:id="`person-${id}`" />
+      <Checkbox v-bind:checked="employee" disabled v-bind:id="`person-${id}`" />
     </td>
     <td class="actions">
       <button class="delete" @click="setDelete">

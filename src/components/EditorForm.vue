@@ -17,10 +17,12 @@ export default {
   components: {Checkbox, TextField},
   methods: {
     ...mapMutations(['modifyPerson']),
-    updateField (input) {
+    updateField (event) {
       this.modifyPerson({
-        field: input.id,
-        value: input.type === 'checkbox' ? input.checked : input.value
+        field: event.target.id,
+        value: event.target.type === 'checkbox'
+          ? event.target.checked
+          : event.target.value
       })
     }
   }

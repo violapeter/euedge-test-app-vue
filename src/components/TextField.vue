@@ -2,9 +2,8 @@
   <fieldset class="fieldset">
     <label :for="id">{{ label }}</label>
     <input
-      @change="$emit('change', $event.target)"
-      @input="$emit('input', $event.target)"
-      @keyup="$emit('keyup', $event.target)"
+      v-bind="$attrs"
+      v-on="listeners"
       :id="id"
       :type="type"
       class="input"/>
@@ -15,6 +14,7 @@
 const TEXT_FIELD_TYPES = ['text', 'number', 'email', 'password', 'search', 'tel', 'url']
 export default {
   name: 'TextField',
+  inheritAttrs: false,
   props: {
     id: {
       required: true,
@@ -24,6 +24,11 @@ export default {
       validator: val => [...TEXT_FIELD_TYPES].includes(val)
     },
     label: String
+  },
+  computed: {
+    listeners () {
+      return { ...this.$listeners }
+    }
   }
 }
 </script>

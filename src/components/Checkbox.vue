@@ -1,7 +1,6 @@
 <template>
   <div class="checkbox-wrapper">
-    <input class="checkbox-input" type="checkbox" :id="id" :disabled="readOnly" :checked="checked"
-      @change="$emit('change', $event.target)"/>
+    <input class="checkbox-input" type="checkbox" :checked="checked" :id="id" v-bind="$attrs" v-on="listeners" />
     <label class="checkbox-box" :for="id"></label>
     <label class="checkbox-label" :for="id">
       <slot></slot>
@@ -12,6 +11,7 @@
 <script>
 export default {
   name: 'Checkbox',
+  inheritAttrs: false,
   props: {
     id: {
       type: String,
@@ -22,6 +22,11 @@ export default {
     },
     readOnly: {
       type: Boolean
+    }
+  },
+  computed: {
+    listeners () {
+      return { ...this.$listeners }
     }
   }
 }
